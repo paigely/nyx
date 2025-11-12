@@ -1,0 +1,4 @@
+assets/unfree/*.ttf
+.DS_Store
+.env
+locale.nix

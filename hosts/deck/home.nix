@@ -40,6 +40,7 @@
 		gnomeExtensions.compiz-alike-magic-lamp-effect
 		gnomeExtensions.dash-to-dock
 		(pkgs.callPackage ../../packages/discord-presence-lsp.nix {})
+		(pkgs.callPackage ../../packages/color-lsp.nix {})
 	];
 
 	xdg.desktopEntries = {
@@ -170,24 +171,28 @@
 				"deno"
 			];
 			userSettings = {
-				auto_update = false;
-				show_whitespaces = "all";
-				tabs = {
-					file_icons = true;
-				};
 				disable_ai = true;
-				telemetry = {
-					diagnostics = false;
-					metrics = false;
-				};
+				auto_update = false;
+				telemetry.metrics = false;
+				telemetry.diagnostics = false;
+				title_bar.show_sign_in = false;
+
+				tab_size = 4;
+				hard_tabs = true;
+				show_whitespaces = "all";
+				tabs.file_icons = true;
 				ui_font_size = lib.mkForce 17.0;
 				ui_font_weight = lib.mkForce 300.0;
 				buffer_font_size = lib.mkForce 15.0;
 				buffer_font_weight = lib.mkForce 300.0;
-				hard_tabs = true;
-				tab_size = 4;
-				title_bar = {
-					show_sign_in = false;
+
+
+				languages."Nix" = {
+					language_servers = [ "nixd" "!nil" ];
+					formatter.external = {
+						command = "alejandra";
+						arguments = ["--quiet" "--"];
+					};
 				};
 			};
 		};

@@ -112,7 +112,6 @@
 		meson
 		cmake
 		alejandra
-		nil
 		killall
 		unzip
 		p7zip

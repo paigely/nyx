@@ -275,7 +275,7 @@ with lib.hm.gvariant; {
 					])
 				(mkDictionaryEntry ["borderRadius" (mkVariant (mkUint32 15))])
 				(mkDictionaryEntry ["smoothing" (mkVariant (mkDouble "0.1"))])
-				(mkDictionaryEntry ["borderColor" (mkVariant (mkTuple [(mkDouble "0.1411764770746231") (mkDouble "0.12156862765550613") (mkDouble "0.1921568661928177") (mkDouble "1.0")]))])
+				(mkDictionaryEntry ["borderColor" (mkVariant (mkTuple [(mkDouble "1.0") (mkDouble "1.0") (mkDouble "1.0") (mkDouble "0.059999998658895493")]))])
 				(mkDictionaryEntry ["enabled" (mkVariant true)])
 			];
 			settings-version = mkUint32 7;

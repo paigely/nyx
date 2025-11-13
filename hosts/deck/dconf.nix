@@ -21,6 +21,10 @@ with lib.hm.gvariant; {
 			favorite-apps = ["org.gnome.Nautilus.desktop" "zen-beta.desktop" "vesktop.desktop" "spotify.desktop" "dev.zed.Zed.desktop" "org.gnome.Console.desktop"];
 		};
 
+		"org/gnome/desktop/wm/preferences" = {
+			button-layout = ":minimize,maximize,close";
+		};
+
 		"org/gnome/desktop/calendar" = {
 			show-weekdate = true;
 		};
@@ -43,6 +47,7 @@ with lib.hm.gvariant; {
 			enable-hot-corners = false;
 			show-battery-percentage = true;
 			toolkit-accessibility = true;
+			gtk-enable-primary-paste = false;
 		};
 
 		"org/gnome/desktop/peripherals/keyboard" = {

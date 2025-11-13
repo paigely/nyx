@@ -27,13 +27,6 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 			inputs.lix.follows = "lix";
 		};
-		base16 = {
-			url = "github:SenchoPens/base16.nix";
-		};
-		tt-schemes = {
-			url = "github:tinted-theming/schemes";
-			flake = false;
-		};
 		stylix = {
 			url = "github:nix-community/stylix";
 			inputs.nixpkgs.follows = "nixpkgs";

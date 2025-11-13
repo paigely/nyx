@@ -66,22 +66,29 @@
 		enable = true;
 		overlays.enable = false;
 		polarity = "dark";
-		image = ../../assets/JWqNRC1.jpeg;
-		base16Scheme = "${inputs.tt-schemes}/base16/chinoiserie-night.yaml";
+		image = ../../assets/wallpapers/black_metal_contourline.png;
+		base16Scheme = {
+			base00 = "#000000";
+			base01 = "#121212";
+			base02 = "#222222";
+			base03 = "#333333";
+			base04 = "#999999";
+			base05 = "#c1c1c1";
+			base06 = "#999999";
+			base07 = "#c1c1c1";
+			base08 = "#5f8787";
+			base09 = "#aaaaaa";
+			base0A = "#a06666";
+			base0B = "#dd9999";
+			base0C = "#aaaaaa";
+			base0D = "#888888";
+			base0E = "#999999";
+			base0F = "#444444";
+		};
 
 		targets = {
 			zen-browser.profileNames = ["default"];
 			vesktop.enable = false;
-		};
-
-		icons = {
-			enable = true;
-			dark = "WhiteSur";
-			light = "WhiteSur";
-			package = pkgs.whitesur-icon-theme.override {
-				boldPanelIcons = true;
-				alternativeIcons = true;
-			};
 		};
 
 		cursor = {
@@ -186,9 +193,8 @@
 				buffer_font_size = lib.mkForce 15.0;
 				buffer_font_weight = lib.mkForce 300.0;
 
-
 				languages."Nix" = {
-					language_servers = [ "nixd" "!nil" ];
+					language_servers = ["nixd" "!nil"];
 					formatter.external = {
 						command = "alejandra";
 						arguments = ["--quiet" "--"];

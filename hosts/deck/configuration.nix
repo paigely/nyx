@@ -115,6 +115,8 @@
 		killall
 		unzip
 		p7zip
+		go
+		gopls
 	];
 
 	services.xserver.excludePackages = [pkgs.xterm];

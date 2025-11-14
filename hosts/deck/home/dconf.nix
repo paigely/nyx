@@ -18,7 +18,7 @@ with lib.hm.gvariant; {
 				compiz-alike-magic-lamp-effect.extensionUuid
 				dash-to-dock.extensionUuid
 			];
-			favorite-apps = ["org.gnome.Nautilus.desktop" "zen-beta.desktop" "vesktop.desktop" "spotify.desktop" "dev.zed.Zed.desktop" "org.gnome.Console.desktop"];
+			favorite-apps = ["org.gnome.Nautilus.desktop" "zen-beta.desktop" "dev.zed.Zed.desktop" "vesktop.desktop" "spotify.desktop" "org.gnome.Console.desktop"];
 		};
 
 		"org/gnome/desktop/wm/preferences" = {
@@ -46,7 +46,7 @@ with lib.hm.gvariant; {
 			cursor-blink = false;
 			enable-hot-corners = false;
 			show-battery-percentage = true;
-			toolkit-accessibility = true;
+			toolkit-accessibility = false;
 			gtk-enable-primary-paste = false;
 		};
 
@@ -247,6 +247,14 @@ with lib.hm.gvariant; {
 			enable-systray = false;
 		};
 
+		"org/gnome/shell/extensions/dash-to-dock" = {
+			dock-fixed = true;
+			hot-keys = false;
+			show-mounts = false;
+			multi-monitor = true;
+			disable-overview-on-startup = true;
+		};
+
 		"org/gnome/shell/extensions/flickernaut" = {
 			applications = [
 				''
@@ -311,12 +319,18 @@ with lib.hm.gvariant; {
 			animation-speed = mkDouble "100.0";
 			blur-brightness = mkDouble "0.6";
 			blur-sigma = mkDouble "30.0";
+			border-radius = mkDouble "7.0";
+			border-color = "(0.14117647707462311, 0.12156862765550613, 0.19215686619281769, 1.0)";
+			background-color = "(0.0, 0.0, 0.0, 0.6600000262260437)";
+			border-thickness = 1;
 			entry-font-size = 1;
 			popup-at-cursor-monitor = true;
+			use-animations = false;
 			preferred-monitor = 0;
 			scale-height = mkDouble "0.1";
 			scale-width = mkDouble "0.1";
-			shortcut-search = ["<Alt>space" "<Super>space"];
+			shortcut-search = ["<Super>space"];
+			secondary-shortcut-search = ["<Super>space"];
 			show-panel-icon = false;
 		};
 

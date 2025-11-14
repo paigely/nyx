@@ -1,4 +1,4 @@
 ## nyx
 (•⩊ •マ.ᐟ
 
-![](.github/screenshot.png)
+![](assets/readme/screenshot.png)

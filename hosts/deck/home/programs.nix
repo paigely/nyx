@@ -1,127 +1,16 @@
 {
-	pkgs,
 	inputs,
 	lib,
+	pkgs,
 	...
 }: {
-	imports = [
-		inputs.zen-browser.homeModules.beta
-		inputs.spicetify-nix.homeManagerModules.default
-		inputs.stylix.homeModules.stylix
-		./dconf.nix
-	];
-
-	home.stateVersion = "25.05";
-	home.homeDirectory = "/home/pager";
-	programs.home-manager.enable = true;
-
-	home.packages = with pkgs; [
-		vesktop
-		zed-editor
-		vscodium
-		android-studio
-		gnome-builder
-		dbeaver-bin
-		sushi
-		inkscape
-		gimp
-		steam
-		pinta
-		localsend
-		celluloid
-		nautilus-python
-		nautilus-open-any-terminal
-		gnomeExtensions.flickernaut
-		gnomeExtensions.blur-my-shell
-		gnomeExtensions.rounded-window-corners-reborn
-		gnomeExtensions.appindicator
-		gnomeExtensions.search-light
-		gnomeExtensions.color-picker
-		gnomeExtensions.compiz-alike-magic-lamp-effect
-		gnomeExtensions.dash-to-dock
-		(pkgs.callPackage ../../packages/discord-presence-lsp.nix {})
-		(pkgs.callPackage ../../packages/color-lsp.nix {})
-	];
-
-	xdg.desktopEntries = {
-		micro = {
-			name = "Micro";
-			noDisplay = true;
-		};
-		kvantummanager = {
-			name = "Kvantum Manager";
-			noDisplay = true;
-		};
-		qt5ct = {
-			name = "Qt5 Settings";
-			noDisplay = true;
-		};
-		qt6ct = {
-			name = "Qt6 Settings";
-			noDisplay = true;
-		};
-	};
-
-	stylix = {
-		enable = true;
-		overlays.enable = false;
-		polarity = "dark";
-		image = ../../assets/wallpapers/black_metal_contourline.png;
-		base16Scheme = {
-			base00 = "#000000";
-			base01 = "#121212";
-			base02 = "#222222";
-			base03 = "#333333";
-			base04 = "#999999";
-			base05 = "#c1c1c1";
-			base06 = "#999999";
-			base07 = "#c1c1c1";
-			base08 = "#5f8787";
-			base09 = "#aaaaaa";
-			base0A = "#a06666";
-			base0B = "#dd9999";
-			base0C = "#aaaaaa";
-			base0D = "#888888";
-			base0E = "#999999";
-			base0F = "#444444";
-		};
-
-		targets = {
-			zen-browser.profileNames = ["default"];
-			vesktop.enable = false;
-		};
-
-		cursor = {
-			name = "Bibata-Modern-Classic";
-			package = pkgs.bibata-cursors;
-			size = 22;
-		};
-
-		fonts = let
-			google-sans = pkgs.callPackage ../../packages/google-sans.nix {};
-		in {
-			serif = {
-				package = google-sans;
-				name = "Google Sans Flex";
-			};
-			sansSerif = {
-				package = google-sans;
-				name = "Google Sans Flex";
-			};
-			monospace = {
-				package = pkgs.maple-mono.NF;
-				name = "Maple Mono NF";
-			};
-			emoji = {
-				package = pkgs.callPackage ../../packages/apple-color-emoji.nix {};
-				name = "Apple Color Emoji";
-			};
-		};
+	stylix.targets = {
+		zen-browser.profileNames = ["default"];
+		vesktop.enable = false;
 	};
 
 	programs = {
 		micro.enable = true;
-		vesktop.enable = true;
 		fastfetch = {
 			enable = true;
 			settings = {
@@ -130,6 +19,7 @@
 					"title"
 					"separator"
 					"os"
+					"kernel"
 					"cpu"
 					"memory"
 					"host"
@@ -157,16 +47,9 @@
 			enable = true;
 			enableGitIntegration = true;
 		};
-		# TODO
-		#git = {
-		#	enable = true;
-		#	settings = {
-		#		init.defaultBranch = "master";
-		#		format.signOff = true;
-		#	};
-		#};
 		zed-editor = {
 			enable = true;
+			package = pkgs.zed-editor.fhsWithPackages (pkgs: with pkgs; [openssl zlib]);
 			extensions = [
 				"nix"
 				"toml"
@@ -176,6 +59,8 @@
 				"make"
 				"swift"
 				"deno"
+				"discord-presence"
+				"color-highlight"
 			];
 			userSettings = {
 				disable_ai = true;
@@ -216,6 +101,13 @@
 		zen-browser = {
 			enable = true;
 			nativeMessagingHosts = [pkgs.firefoxpwa];
+			package =
+				inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.beta.overrideAttrs (oldAttrs: {
+						desktopItem =
+							oldAttrs.desktopItem.override {
+								icon = ../../../assets/icons/zen.svg;
+							};
+					});
 			policies = {
 				AutofillAddressEnabled = false;
 				AutofillCreditCardEnabled = false;

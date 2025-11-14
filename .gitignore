@@ -1,4 +1,4 @@
 assets/unfree/*.ttf
 .DS_Store
 .env
-locale.nix
+hosts/deck/system/private.nix

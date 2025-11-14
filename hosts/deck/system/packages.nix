@@ -1,0 +1,65 @@
+{pkgs, ...}: {
+	environment.systemPackages = with pkgs; [
+		git
+		git-filter-repo
+		fish
+		fastfetch
+		micro
+		zip
+		nodejs
+		pnpm
+		rustc
+		rustfmt
+		cargo
+		android-tools
+		nixd
+		diff-so-fancy
+		wget
+		curl
+		aria2
+		fd
+		file
+		cloc
+		clang
+		lua
+		ninja
+		meson
+		cmake
+		alejandra
+		killall
+		unzip
+		p7zip
+		go
+		gopls
+	];
+	fonts.packages = with pkgs; [
+		noto-fonts
+		source-han-sans
+	];
+	services.xserver.excludePackages = [pkgs.xterm];
+	environment.gnome.excludePackages = with pkgs; [
+		baobab
+		cheese
+		epiphany
+		simple-scan
+		yelp
+		evince
+		geary
+		seahorse
+		snapshot
+		decibels
+		showtime
+		totem
+		gnome-calendar
+		gnome-clocks
+		gnome-contacts
+		gnome-maps
+		gnome-photos
+		gnome-weather
+		gnome-disk-utility
+		gnome-connections
+		gnome-music
+		gnome-text-editor
+		gnome-tour
+	];
+}

@@ -1,6 +1,10 @@
 {
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+		jovian = {
+			url = "github:Jovian-Experiments/Jovian-NixOS";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 		spicetify-nix = {
 			url = "github:Gerg-L/spicetify-nix";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +40,7 @@
 		nixpkgs,
 		home-manager,
 		lix-module,
+		jovian,
 		...
 	} @ inputs: {
 		nixosConfigurations = {
@@ -48,6 +53,7 @@
 						./hosts/deck/configuration.nix
 						lix-module.nixosModules.default
 						home-manager.nixosModules.default
+						jovian.nixosModules.jovian
 					];
 				};
 		};

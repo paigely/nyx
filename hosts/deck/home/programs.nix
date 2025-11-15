@@ -101,13 +101,6 @@
 		zen-browser = {
 			enable = true;
 			nativeMessagingHosts = [pkgs.firefoxpwa];
-			package =
-				inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.beta.overrideAttrs (oldAttrs: {
-						desktopItem =
-							oldAttrs.desktopItem.override {
-								icon = ../../../assets/icons/zen.svg;
-							};
-					});
 			policies = {
 				AutofillAddressEnabled = false;
 				AutofillCreditCardEnabled = false;

@@ -349,5 +349,26 @@ with lib.hm.gvariant; {
 			show-hidden = true;
 			sort-directories-first = true;
 		};
+
+		"org/gnome/builder" = {
+			format-on-save = true;
+		};
+
+		"org/gnome/builder/editor" = {
+			line-height = mkDouble "1.3";
+			font-name = "Maple Mono NF 12";
+			style-scheme-name = "Adwaita-dark";
+			auto-save-timeout = 1;
+			show-grid-lines = false;
+			draw-spaces = ["space" "tab"];
+		};
+
+		"org/gnome/builder/terminal" = {
+			scroll-on-output = true;
+		};
+
+		"org/gnome/builder/project-tree" = {
+			show-ignored-files = true;
+		};
 	};
 }

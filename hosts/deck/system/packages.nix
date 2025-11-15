@@ -19,7 +19,7 @@
 		aria2
 		fd
 		file
-		cloc
+		tokei
 		clang
 		lua
 		ninja

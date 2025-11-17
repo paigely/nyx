@@ -4,26 +4,26 @@
 		loader.efi.canTouchEfiVariables = true;
 		initrd.luks.devices."luks-d9221136-1433-45c2-80ec-ba13025efe6a".device = "/dev/disk/by-uuid/d9221136-1433-45c2-80ec-ba13025efe6a";
 	};
-	jovian = {
-		steam.enable = false;
-		decky-loader.enable = false;
-		steamos = {
-			useSteamOSConfig = true;
-			enableZram = false;
-		};
-		hardware.has.amd.gpu = true;
-		devices.steamdeck = {
-			enable = true;
-			autoUpdate = true;
-			enableGyroDsuService = true;
-		};
-	};
 	networking = {
 		hostName = "deck";
 		networkmanager.enable = true;
-		firewall = {
+		firewall = rec {
 			enable = true;
-			allowedTCPPorts = [80 53317];
+			allowedTCPPortRanges = [
+				{
+					from = 1714;
+					to = 1764;
+				}
+				{
+					from = 80;
+					to = 80;
+				}
+				{
+					from = 53317;
+					to = 53317;
+				}
+			];
+			allowedUDPPortRanges = allowedTCPPortRanges;
 		};
 	};
 	security = {

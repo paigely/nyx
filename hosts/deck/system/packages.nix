@@ -12,7 +12,8 @@
 		rustfmt
 		cargo
 		android-tools
-		nixd
+		scrcpy
+		nil
 		diff-so-fancy
 		wget
 		curl

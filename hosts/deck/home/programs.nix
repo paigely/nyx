@@ -9,6 +9,13 @@
 		vesktop.enable = false;
 	};
 
+	services = {
+		kdeconnect = {
+			enable = true;
+			package = pkgs.gnomeExtensions.gsconnect;
+		};
+	};
+
 	programs = {
 		micro.enable = true;
 		fastfetch = {
@@ -49,7 +56,6 @@
 		};
 		zed-editor = {
 			enable = true;
-			package = pkgs.zed-editor.fhsWithPackages (pkgs: with pkgs; [openssl zlib]);
 			extensions = [
 				"nix"
 				"toml"
@@ -59,8 +65,6 @@
 				"make"
 				"swift"
 				"deno"
-				"discord-presence"
-				"color-highlight"
 			];
 			userSettings = {
 				disable_ai = true;
@@ -79,13 +83,20 @@
 				buffer_font_weight = lib.mkForce 300.0;
 
 				languages."Nix" = {
-					language_servers = ["nixd" "!nil"];
+					language_servers = ["nil" "!nixd"];
 					formatter.external = {
 						command = "alejandra";
 						arguments = ["--quiet" "--"];
 					};
 				};
+
+				autosave.after_delay.milliseconds = 300;
 			};
+			userKeymaps = [
+				{
+					bindings."ctrl-q" = null;
+				}
+			];
 		};
 		vscode = {
 			enable = true;

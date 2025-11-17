@@ -17,6 +17,7 @@ with lib.hm.gvariant; {
 				color-picker.extensionUuid
 				compiz-alike-magic-lamp-effect.extensionUuid
 				dash-to-dock.extensionUuid
+				gsconnect.extensionUuid
 			];
 			favorite-apps = ["org.gnome.Nautilus.desktop" "zen-beta.desktop" "dev.zed.Zed.desktop" "vesktop.desktop" "spotify.desktop" "org.gnome.Console.desktop"];
 		};

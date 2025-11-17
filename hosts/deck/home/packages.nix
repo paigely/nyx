@@ -22,5 +22,8 @@
 		gnomeExtensions.color-picker
 		gnomeExtensions.compiz-alike-magic-lamp-effect
 		gnomeExtensions.dash-to-dock
+		gnomeExtensions.gsconnect
+		(pkgs.callPackage ../../../packages/color-lsp.nix {})
+		(pkgs.callPackage ../../../packages/discord-presence-lsp.nix {})
 	];
 }

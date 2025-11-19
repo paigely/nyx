@@ -1,28 +1,10 @@
-{pkgs, ...}: {
-	programs.dconf.profiles.gdm.databases = [
-		{
-			settings = {
-				"org/gnome/login-screen" = {
-					disable-user-list = true;
-				};
-				"org/gnome/desktop/interface" = {
-					clock-format = "24h";
-					clock-show-date = true;
-					clock-show-seconds = true;
-					clock-show-weekday = true;
-					cursor-blink = false;
-					show-battery-percentage = true;
-					toolkit-accessibility = true;
-				};
-			};
-		}
-	];
-	programs.fish.enable = true;
-	programs.nh = {
-		enable = true;
-		clean.enable = true;
-		clean.extraArgs = "--keep-since 4d --keep 3";
-		flake = "/home/pager/Projects/nix";
+{
+	pkgs,
+	...
+}: {
+	environment.sessionVariables = {
+		QT_STYLE_OVERRIDE = "darkly";
+		QT_QPA_PLATFORMTHEME = "qt6ct";
 	};
 	stylix = {
 		enable = true;
@@ -73,5 +55,6 @@
 				package = pkgs.callPackage ../../../packages/apple-color-emoji.nix {};
 			};
 		};
+		targets.qt.enable = false;
 	};
 }

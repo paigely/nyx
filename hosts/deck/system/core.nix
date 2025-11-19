@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
 	boot = {
 		loader.systemd-boot.enable = true;
 		loader.efi.canTouchEfiVariables = true;
@@ -30,9 +30,12 @@
 		rtkit.enable = true;
 	};
 	services = {
-		xserver.enable = true;
-		displayManager.gdm.enable = true;
-		desktopManager.gnome.enable = true;
+		desktopManager.plasma6.enable = true;
+		displayManager.sddm = {
+			enable = true;
+			wayland.enable = true;
+			settings.General.DisplayServer = "wayland";
+		};
 		cloudflare-warp.enable = true;
 		pulseaudio.enable = false;
 		pipewire = {
@@ -47,6 +50,12 @@
 				layout = "us";
 				variant = "";
 			};
+		};
+		udev = {
+			enable = true;
+			packages = with pkgs; [
+				steam-devices-udev-rules
+			];
 		};
 	};
 }

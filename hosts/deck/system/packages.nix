@@ -1,9 +1,7 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
 	environment.systemPackages = with pkgs; [
 		git
-		git-filter-repo
-		fish
-		fastfetch
+		bat
 		micro
 		zip
 		nodejs
@@ -11,10 +9,8 @@
 		rustc
 		rustfmt
 		cargo
-		android-tools
-		scrcpy
-		nil
-		diff-so-fancy
+		nixd
+		jq
 		wget
 		curl
 		aria2
@@ -32,35 +28,24 @@
 		p7zip
 		go
 		gopls
+		steam
+		gamemode
+		uv
+		python3
+		pciutils
+		usbutils
+		inputs.darkly.packages.${pkgs.stdenv.hostPlatform.system}.darkly-qt5
+		inputs.darkly.packages.${pkgs.stdenv.hostPlatform.system}.darkly-qt6
 	];
 	fonts.packages = with pkgs; [
 		noto-fonts
 		source-han-sans
 	];
-	services.xserver.excludePackages = [pkgs.xterm];
-	environment.gnome.excludePackages = with pkgs; [
-		baobab
-		cheese
-		epiphany
-		simple-scan
-		yelp
-		evince
-		geary
-		seahorse
-		snapshot
-		decibels
-		showtime
-		totem
-		gnome-calendar
-		gnome-clocks
-		gnome-contacts
-		gnome-maps
-		gnome-photos
-		gnome-weather
-		gnome-disk-utility
-		gnome-connections
-		gnome-music
-		gnome-text-editor
-		gnome-tour
+	environment.plasma6.excludePackages = with pkgs.kdePackages; [
+		elisa
+		okular
+		khelpcenter
+		ktexteditor
+		print-manager
 	];
 }

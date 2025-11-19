@@ -5,19 +5,67 @@
 	...
 }: {
 	stylix.targets = {
-		zen-browser.profileNames = ["default"];
+		qt.enable = false;
 		vesktop.enable = false;
+		librewolf.profileNames = ["default"];
+		kde.decorations = "org.kde.darkly";
 	};
 
-	services = {
-		kdeconnect = {
-			enable = true;
-			package = pkgs.gnomeExtensions.gsconnect;
-		};
-	};
+	services.kdeconnect.enable = true;
+
+	dconf.enable = true;
+	dconf.settings."org/gnome/desktop/wm/preferences".button-layout = ":minimize,maximize,close";
 
 	programs = {
-		micro.enable = true;
+		librewolf = {
+			enable = true;
+			profiles.default = {
+				settings = {
+					"webgl.disabled" = false;
+					"gfx.webrender.compositor.force-enabled" = true;
+					"privacy.resistFingerprinting" = false;
+					"privacy.clearOnShutdown.history" = false;
+					"privacy.clearOnShutdown.cookies" = false;
+					"privacy.clearOnShutdown.sessions" = false;
+					"privacy.clearOnShutdown.cache" = false;
+					"privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+					"privacy.clearOnShutdown_v2.cache" = false;
+					"privacy.sanitize.sanitizeOnShutdown" = false;
+					"network.cookie.lifetimePolicy" = 0;
+					"browser.warnOnQuit" = false;
+					"browser.warnOnQuitShortcut" = false;
+					"widget.use-xdg-desktop-portal.file-picker" = 1;
+					"browser.toolbars.bookmarks.visibility" = "never";
+				};
+				extensions = {
+					/*
+          settings."uBlock0@raymondhill.net".settings = {
+          	selectedFilterLists = [
+          		"ublock-filters"
+          		"ublock-badware"
+          		"ublock-privacy"
+          		"ublock-unbreak"
+          		"ublock-quick-fixes"
+          	];
+          	};
+          */
+					packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+						sponsorblock
+						stylus
+						bitwarden
+						darkreader
+						user-agent-string-switcher
+						violentmonkey
+						ublacklist
+						plasma-integration
+					];
+				};
+			};
+		};
+		chromium = {
+			enable = true;
+			package = pkgs.ungoogled-chromium;
+		};
 		fastfetch = {
 			enable = true;
 			settings = {
@@ -37,6 +85,17 @@
 				];
 			};
 		};
+		eza = {
+			enable = true;
+			extraOptions = [
+				"--group-directories-first"
+				"--header"
+				"--icons=always"
+				"--tree"
+				"--classify"
+				"-L1"
+			];
+		};
 		fish = {
 			enable = true;
 			interactiveShellInit = ''
@@ -44,6 +103,8 @@
 				set EDITOR micro
 				set VISUAL micro
 				set TZ "Europe/Berlin"
+				abbr -a cat bat
+				abbr -a ls eza
 				function fish_prompt -d "Write out the prompt"
 					printf '(%s%s%s) $ ' \
 						(set_color magenta) (prompt_pwd) (set_color normal)
@@ -83,7 +144,7 @@
 				buffer_font_weight = lib.mkForce 300.0;
 
 				languages."Nix" = {
-					language_servers = ["nil" "!nixd"];
+					language_servers = ["nixd" "!nil"];
 					formatter.external = {
 						command = "alejandra";
 						arguments = ["--quiet" "--"];
@@ -108,53 +169,6 @@
 				stylelint.vscode-stylelint
 				bradlc.vscode-tailwindcss
 			];
-		};
-		zen-browser = {
-			enable = true;
-			nativeMessagingHosts = [pkgs.firefoxpwa];
-			policies = {
-				AutofillAddressEnabled = false;
-				AutofillCreditCardEnabled = false;
-				DisableAppUpdate = true;
-				DisableFeedbackCommands = true;
-				DisableFirefoxStudies = true;
-				DisablePocket = true;
-				DisableTelemetry = true;
-				DontCheckDefaultBrowser = true;
-				NoDefaultBookmarks = true;
-				OfferToSaveLogins = false;
-				EnableTrackingProtection = {
-					Value = true;
-					Locked = true;
-					Cryptomining = true;
-					Fingerprinting = true;
-				};
-				Cookies = {
-					Behavior = "reject-foreign";
-					Locked = true;
-				};
-				Preferences = let
-					locked = value: {
-						"Value" = value;
-						"Status" = "locked";
-					};
-				in {
-					"browser.tabs.warnOnClose" = locked false;
-					"zen.view.use-single-toolbar" = locked false;
-				};
-			};
-			profiles."default" = {
-				extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-					adnauseam
-					sponsorblock
-					stylus
-					bitwarden
-					darkreader
-					user-agent-string-switcher
-					violentmonkey
-					ublacklist
-				];
-			};
 		};
 		spicetify = let
 			spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
